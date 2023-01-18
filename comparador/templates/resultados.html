@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block head %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="subtitulo">Resultados de tu búsqueda</h1>
+</div>
+<p></p>
+<p></p>
+<div class="margenes">
+  <div class="container">
+    <div class="row">
+        <div class="col-4">
+          <h3 class="centrado">Origen: {{origen}}</h3>
+        </div>
+        <div class="col-4">
+          <h3 class="centrado">Destino: {{destino}}</h3>
+        </div>
+        <div class="col-4">
+          <h3 class="centrado">Fecha: {{fecha}}</h3>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">        
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Opción</th>
+        <th>N. Escalas</th>
+        <th>Duración</th>
+        <th>Salida</th>
+        <th>Llegada</th>
+        <th>Aerolínea/s</th>
+      </tr>
+    </thead>
+    <tbody>
+    <!-- jinja2 Technique -->
+    {% if d %}  
+    {% for i in d %}
+      <tr>
+        <td>{{i.opcion}}</td>
+        <td>{{i.escalas}}</td>
+        <td>{{i.duracion}}</td>
+        <td>{{i.salida}}</td>
+        <td>{{i.llegada}}</td>
+        <td>{{i.aerolineas}}</td>
+      </tr>
+    {% endfor %}
+    {% else %}
+    <h3>No hay resultados para tu búsqueda. Revisa los aeropuertos, la fecha, y si tienes un token válido</h2>
+    {% endif %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

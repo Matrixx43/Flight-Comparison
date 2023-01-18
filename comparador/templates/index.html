@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block head %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js">  
+</script>  
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js">  
+</script>  
+    
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css"
+rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1 class="subtitulo">Selecciona tu viaje</h1>
+</div>
+    <script>
+  $( function() {
+    var availableTags = [
+        {% for aeropuerto in aeropuertos %}
+            "{{aeropuerto.nombre}}",
+        {% endfor %}
+    ];
+    $( "#aeropuerto1" ).autocomplete({
+        minLength: 2,
+      source: availableTags
+    });
+  } );
+  </script>
+  <script>
+    $( function() {
+      var availableTags = [
+          {% for aeropuerto in aeropuertos %}
+              "{{aeropuerto.nombre}}",
+          {% endfor %}
+      ];
+      $( "#aeropuerto2" ).autocomplete({
+          minLength: 2,
+        source: availableTags
+      });
+    } );
+    </script>
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+        </div>
+        <div class="col-6">
+            <form action="/comparador/" method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <p></p>
+                <button type="submit" class="btn btn-secondary">Buscar</button>
+            </form>
+        </div>
+        <div class="col-3">
+        </div>
+    </div>
+</div>
+{% endblock %}
